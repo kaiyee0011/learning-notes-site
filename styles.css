@@ -208,12 +208,13 @@ body > footer p { margin: 0; }
 .takeaway .eyebrow { margin-bottom: 24px; }
 .note-article .takeaway h2 { max-width: 19em; margin-bottom: 24px; font-size: clamp(2rem, 4vw, 3.1rem); }
 .takeaway > p:last-child { max-width: 62ch; margin: 0; color: var(--muted); }
-.thought-list { display: grid; gap: 68px; }
-.thought-list figure { margin: 0; }
-.thought-list figcaption, .text-thought { margin-bottom: 20px; display: grid; grid-template-columns: 48px 1fr; gap: 18px; }
+.thought-list { display: grid; gap: 0; border-bottom: 1px solid var(--line); }
+.thought-list figure { margin: 0; padding: 28px 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px); gap: 32px; align-items: start; border-top: 1px solid var(--line); }
+.thought-list figcaption, .text-thought { display: grid; grid-template-columns: 48px 1fr; gap: 18px; }
+.thought-list figcaption { margin: 0; }
 .thought-list p { margin: 0; }
-.thought-list img { width: 100%; border: 1px solid var(--line); border-radius: 12px; filter: grayscale(1); background: var(--soft); }
-.text-thought { padding: 30px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.thought-list img { width: 100%; max-height: 240px; object-fit: contain; object-position: top right; border: 1px solid var(--line); border-radius: 10px; filter: grayscale(1); background: var(--soft); }
+.text-thought { margin: 0; padding: 28px 0; border-top: 1px solid var(--line); }
 .next-step { padding: 44px; border: 1px solid var(--line); border-radius: 18px; background: var(--glass); backdrop-filter: blur(16px); }
 .next-step .eyebrow { margin-bottom: 18px; }
 .note-article .next-step h2 { margin-bottom: 26px; }
@@ -265,6 +266,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .note-title h1 { font-size: clamp(2.6rem, 12vw, 3.8rem); }
   .note-facts { gap: 18px; flex-wrap: wrap; }
   .note-article > section { margin-top: 80px; }
+  .thought-list figure { grid-template-columns: 1fr; gap: 20px; }
+  .thought-list img { width: min(100%, 380px); max-height: 220px; object-position: top left; }
   .next-step { padding: 30px 22px; }
 }
 
@@ -272,7 +275,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .wordmark > span:last-child { display: none; }
   .site-header nav a { font-size: 0.76rem; }
   .course-credit { grid-template-columns: 1fr; }
-  .thought-list { gap: 52px; }
+  .thought-list figure { padding: 24px 0; }
   .note-footer { align-items: flex-start; flex-direction: column; }
 }
 
