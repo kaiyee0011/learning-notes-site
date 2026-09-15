@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kaiyee 的学习档案：记录进度、难度、心得与完整笔记。" />
+    <meta name="theme-color" content="#f4f5f6" />
+    <title>学习档案 · Kaiyee</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#learning-log">跳到学习记录</a>
+
+    <div class="ambient ambient-a" aria-hidden="true"></div>
+    <div class="ambient ambient-b" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="返回首页顶部">
+        <span class="wordmark-mark" aria-hidden="true">K</span>
+        <span>Study Archive</span>
+      </a>
+      <nav aria-label="主要导航">
+        <a href="#learning-log">进度</a>
+        <a href="./notes/2026-09-15-datawhale-task-1.html">最新笔记</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-main reveal">
+          <p class="eyebrow">LEARNING, IN PUBLIC · 2026</p>
+          <h1 id="hero-title">把学习<br /><em>留下痕迹。</em></h1>
+          <p class="hero-intro">
+            这里不展示完美答案，只记录我学了什么、卡在哪里，以及下一次准备走向哪里。
+          </p>
+          <a class="primary-link" href="#learning-log">查看学习记录 <span aria-hidden="true">↓</span></a>
+        </div>
+
+        <aside class="hero-aside reveal" aria-label="当前学习进度摘要">
+          <div class="index-number">01</div>
+          <p class="aside-label">CURRENT INDEX</p>
+          <p class="aside-title">从环境准备开始，建立 Agent 的基础知识地图。</p>
+          <div class="progress-line" aria-label="已记录第一篇学习笔记">
+            <span></span>
+          </div>
+          <dl class="quiet-stats">
+            <div><dt>学习日</dt><dd>01</dd></div>
+            <div><dt>公开笔记</dt><dd>01</dd></div>
+            <div><dt>随笔片段</dt><dd>07</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="log-section" id="learning-log" aria-labelledby="log-title">
+        <header class="section-header reveal">
+          <div>
+            <p class="eyebrow">PROGRESS LOG</p>
+            <h2 id="log-title">学习进度</h2>
+          </div>
+          <p>按真实记录持续更新。未记录的数据，保留空白。</p>
+        </header>
+
+        <div class="table-toolbar reveal">
+          <label class="search-field">
+            <span class="sr-only">搜索学习记录</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+            <input id="log-search" type="search" placeholder="搜索主题或备注" autocomplete="off" />
+          </label>
+          <span class="record-count" aria-live="polite"><b id="visible-count">1</b> 条记录</span>
+        </div>
+
+        <div class="table-shell reveal">
+          <table>
+            <caption class="sr-only">学习日期、时间、难度评级、备注和笔记入口</caption>
+            <thead>
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">学习日期</th>
+                <th scope="col">时间</th>
+                <th scope="col">难度评级</th>
+                <th scope="col">备注</th>
+                <th scope="col"><span class="sr-only">笔记入口</span></th>
+              </tr>
+            </thead>
+            <tbody id="log-body">
+              <tr data-search="datawhale task 1 环境准备 课前导读 agent rag mcp langchain langgraph">
+                <td data-label="序号"><span class="row-index">001</span></td>
+                <td data-label="学习日期">
+                  <time datetime="2026-09-15">2026.09.15</time>
+                  <span class="mobile-topic">Datawhale · Task 1</span>
+                </td>
+                <td data-label="时间"><span class="unrecorded">未记录</span></td>
+                <td data-label="难度评级">
+                  <span class="difficulty" aria-label="难度 2 星，入门">
+                    <span aria-hidden="true"><i></i><i></i><b></b><b></b><b></b></span>
+                    入门
+                  </span>
+                </td>
+                <td data-label="备注">
+                  <strong>Datawhale · Task 1</strong>
+                  <span>环境自检完成，开始建立 Agent、RAG 与 MCP 的基础地图。</span>
+                </td>
+                <td data-label="笔记">
+                  <a class="note-link" href="./notes/2026-09-15-datawhale-task-1.html" aria-label="查看 Datawhale Task 1 学习笔记">
+                    查看笔记 <span aria-hidden="true">↗</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="empty-state" id="empty-state" hidden>没有匹配的学习记录。</p>
+        </div>
+      </section>
+
+      <section class="closing-note reveal" aria-labelledby="closing-title">
+        <p class="eyebrow">A NOTE TO SELF</p>
+        <h2 id="closing-title">不知道，<br />也是进度的一部分。</h2>
+        <p>把“还不清楚”写下来，下一次学习才有准确的起点。</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Kaiyee · Built as a quiet record of learning.</p>
+      <a href="#top">回到顶部 ↑</a>
+    </footer>
+  </body>
+</html>
