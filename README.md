@@ -2,6 +2,8 @@
 
 一个无需构建工具的个人学习档案静态站点。首页展示学习进度表，单篇页面保存心得、截图与课程入口。
 
+学习内容来自 Datawhale 与 OceanBase 社区联合共建的开源课程 [《Easy Data x AI》](https://github.com/datawhalechina/easy-data-x-ai)。感谢项目维护者与所有开源贡献者。
+
 ## 本地预览
 
 ```bash
