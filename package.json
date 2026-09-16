@@ -1,0 +1,16 @@
+{
+  "name": "learning-notes-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "new:task": "node scripts/new-note.mjs task",
+    "new:reading": "node scripts/new-note.mjs reading"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "nunjucks": "^3.2.4"
+  }
+}

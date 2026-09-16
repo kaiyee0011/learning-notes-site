@@ -1,0 +1,23 @@
+<aside class="chapter-rail reveal">
+  <a class="back-link" href="{{ basePath }}index.html#learning-log">← 返回进度</a>
+  <p class="eyebrow">TASK MAP</p>
+  <nav class="chapter-list" aria-label="全部学习任务">
+    {% for task in tasks %}
+      {% if task.note %}
+        <a
+          class="{% if currentTask and currentTask.id == task.id %}current{% endif %}"
+          href="{{ basePath }}notes/{{ task.id }}/"
+          {% if currentTask and currentTask.id == task.id %}aria-current="page"{% endif %}
+        >
+          <span>TASK {{ task.number }}</span>
+          <b>{{ task.title }}</b>
+        </a>
+      {% else %}
+        <span class="locked">
+          <b>TASK {{ task.number }}</b>
+          <span>{{ task.title }} · 未解锁</span>
+        </span>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</aside>
