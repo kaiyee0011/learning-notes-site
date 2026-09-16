@@ -18,7 +18,7 @@
     <header class="site-header" id="top">
       <a class="wordmark" href="#top" aria-label="返回首页顶部">
         <span class="wordmark-mark" aria-hidden="true">K</span>
-        <span>Study Archive</span>
+        <span>Kaiyee's Study Archive</span>
       </a>
       <nav aria-label="主要导航">
         <a href="#learning-log">学习进度</a>
@@ -30,36 +30,19 @@
     <main>
       <section class="course-intro reveal" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">EASY DATA × AI · TASK LOG</p>
-          <h1 id="page-title">学习任务与进度</h1>
-          <p>每个 Task 包含一篇任务笔记，以及对应的产品、开发者或产业应用阅读笔记。</p>
+          <p class="eyebrow">LEARNING IN PUBLIC · 2026</p>
+          <h1 id="page-title">EASY DATA × AI · TASK LOG</h1>
+          <p class="course-deck">每个 Task 包含一篇任务笔记，以及对应的产品、开发者或产业应用阅读笔记。</p>
+          <p class="course-source"><a href="{{ site.courseRepository }}" target="_blank" rel="noreferrer">学习内容来自 Datawhale 与 OceanBase 社区联合共建的《Easy Data x AI》。本站用于整理个人任务笔记与阅读随笔，感谢项目维护者与所有开源贡献者。↗</a></p>
         </div>
         <div class="course-progress" aria-label="课程学习进度 {{ completedTasks }}/{{ totalTasks }}">
           <div><span>已完成 Task</span><strong>{{ completedTasks | pad2 }} / {{ totalTasks | pad2 }}</strong></div>
           <div class="progress-line"><span style="width: {{ progressPercent }}%"></span></div>
-          <p>进度以学习活动飞书表格为准。</p>
         </div>
       </section>
 
-      <aside class="course-credit reveal" aria-label="进度来源与课程致谢">
-        <span class="credit-mark" aria-hidden="true">↗</span>
-        <p>
-          学习安排以
-          <a href="{{ site.progressSource }}" target="_blank" rel="noreferrer">飞书 Task 进度表</a>
-          为唯一依据；阅读内容来自 Datawhale 与 OceanBase 社区联合共建的
-          <a href="{{ site.courseRepository }}" target="_blank" rel="noreferrer">《Easy Data x AI》</a>。
-          感谢项目维护者与所有开源贡献者。
-        </p>
-      </aside>
-
       <section class="log-section" id="learning-log" aria-labelledby="log-title">
-        <header class="section-header reveal">
-          <div>
-            <p class="eyebrow">TASK 1—9</p>
-            <h2 id="log-title">完整学习进度</h2>
-          </div>
-          <p>Markdown 文件存在且取消草稿状态后，相应入口自动解锁。</p>
-        </header>
+        <h2 class="sr-only" id="log-title">完整学习进度</h2>
 
         <div class="table-toolbar reveal">
           <label class="search-field">
@@ -72,7 +55,7 @@
 
         <div class="table-shell reveal">
           <table>
-            <caption class="sr-only">飞书学习活动 Task 1 至 Task 9 的学习进度</caption>
+            <caption class="sr-only">Task 0 至 Task 9 的学习进度</caption>
             <thead>
               <tr>
                 <th scope="col">Task</th>
@@ -90,13 +73,19 @@
                     <strong class="task-name">{{ task.title }}</strong>
                   </td>
                   <td data-label="计划">
-                    <strong>{{ task.durationDays }} 天</strong>
-                    <span>截止 {{ task.deadlineDisplay }}</span>
+                    <div class="plan-cell {% if task.number == 0 %}personal-plan{% endif %}">
+                      <strong>{{ task.durationDisplay }}</strong>
+                      <span>{% if task.deadline %}截止 {% endif %}{{ task.deadlineCompact }}</span>
+                    </div>
                   </td>
                   <td data-label="学习记录">
                     {% if task.note %}
                       <time datetime="{{ task.note.meta.date }}">{{ task.learningDate or "日期未记录" }}</time>
-                      <span>{{ task.durationMinutes + " 分钟" if task.durationMinutes else "时长未记录" }}</span>
+                      {% if task.durationMinutes %}
+                        <span>{{ task.durationMinutes }} 分钟</span>
+                      {% else %}
+                        <span class="unrecorded">时长未记录</span>
+                      {% endif %}
                     {% else %}
                       <span class="unrecorded">未记录</span>
                     {% endif %}
@@ -117,16 +106,25 @@
                   <td data-label="笔记入口">
                     <div class="note-entry-stack">
                       {% if task.note %}
-                        <a class="note-link task-note-link" href="./notes/{{ task.id }}/">任务笔记 <span aria-hidden="true">↗</span></a>
+                        <a class="entry-link task-note-link" href="./notes/{{ task.id }}/"><span>任务笔记</span><b aria-hidden="true">↗</b></a>
                       {% else %}
-                        <span class="locked-entry">任务笔记 · 未解锁</span>
+                        <span class="entry-link locked-entry" aria-label="任务笔记尚未公开">
+                          <span>任务笔记</span>
+                          <svg class="lock-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2"></rect><path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"></path></svg>
+                        </span>
                       {% endif %}
-                      <div class="reading-links" aria-label="Task {{ task.number }} 阅读笔记">
+                      <div class="reading-links" aria-label="Task {{ task.number }} 的阅读笔记">
                         {% for reading in task.readings %}
                           {% if reading.note %}
-                            <a href="./readings/{{ reading.code }}/" title="{{ reading.title }}">{{ reading.code }}</a>
+                            <a class="entry-link" href="./readings/{{ reading.code }}/">
+                              <span><b>{{ reading.code }}：</b>{{ reading.title }}</span>
+                              <i aria-hidden="true">↗</i>
+                            </a>
                           {% else %}
-                            <span title="{{ reading.track }}：{{ reading.title }}">{{ reading.code }} · 未解锁</span>
+                            <span class="entry-link locked-entry" aria-label="{{ reading.code }}：{{ reading.title }}，笔记尚未公开">
+                              <span><b>{{ reading.code }}：</b>{{ reading.title }}</span>
+                              <svg class="lock-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2"></rect><path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"></path></svg>
+                            </span>
                           {% endif %}
                         {% endfor %}
                       </div>
@@ -142,7 +140,7 @@
     </main>
 
     <footer>
-      <p>个人学习记录 · 进度来自飞书活动表，课程内容版权归原作者与贡献者所有。</p>
+      <p>个人学习记录 · 课程内容版权归原作者与贡献者所有。</p>
       <a href="{{ site.siteRepository }}" target="_blank" rel="noreferrer">查看网站源码 ↗</a>
     </footer>
   </body>

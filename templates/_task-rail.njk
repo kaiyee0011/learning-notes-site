@@ -1,23 +1,50 @@
 <aside class="chapter-rail reveal">
   <a class="back-link" href="{{ basePath }}index.html#learning-log">← 返回进度</a>
   <p class="eyebrow">TASK MAP</p>
-  <nav class="chapter-list" aria-label="全部学习任务">
+  <nav class="chapter-list" aria-label="全部学习任务与阅读笔记">
     {% for task in tasks %}
-      {% if task.note %}
-        <a
-          class="{% if currentTask and currentTask.id == task.id %}current{% endif %}"
-          href="{{ basePath }}notes/{{ task.id }}/"
-          {% if currentTask and currentTask.id == task.id %}aria-current="page"{% endif %}
-        >
+      <details class="task-tree" {% if currentTask and currentTask.id == task.id %}open{% endif %}>
+        <summary class="{% if currentTask and currentTask.id == task.id %}active-task{% endif %}">
           <span>TASK {{ task.number }}</span>
-          <b>{{ task.title }}</b>
-        </a>
-      {% else %}
-        <span class="locked">
-          <b>TASK {{ task.number }}</b>
-          <span>{{ task.title }} · 未解锁</span>
-        </span>
-      {% endif %}
+          <strong>{{ task.title }}</strong>
+          <i aria-hidden="true"></i>
+        </summary>
+        <div class="task-tree-children">
+          {% if task.note %}
+            <a
+              class="tree-note {% if currentTask and currentTask.id == task.id and not currentReading %}current{% endif %}"
+              href="{{ basePath }}notes/{{ task.id }}/"
+              {% if currentTask and currentTask.id == task.id and not currentReading %}aria-current="page"{% endif %}
+            >
+              <span>任务笔记</span>
+              <b aria-hidden="true">↗</b>
+            </a>
+          {% else %}
+            <span class="tree-note locked" aria-label="任务笔记尚未公开">
+              <span>任务笔记</span>
+              <svg class="lock-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2"></rect><path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"></path></svg>
+            </span>
+          {% endif %}
+
+          {% for reading in task.readings %}
+            {% if reading.note %}
+              <a
+                class="tree-reading {% if currentReading and currentReading.code == reading.code %}current{% endif %}"
+                href="{{ basePath }}readings/{{ reading.code }}/"
+                {% if currentReading and currentReading.code == reading.code %}aria-current="page"{% endif %}
+              >
+                <span><b>{{ reading.code }}</b>{{ reading.title }}</span>
+                <i aria-hidden="true">↗</i>
+              </a>
+            {% else %}
+              <span class="tree-reading locked" aria-label="{{ reading.code }}：{{ reading.title }}，笔记尚未公开">
+                <span><b>{{ reading.code }}</b>{{ reading.title }}</span>
+                <svg class="lock-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2"></rect><path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"></path></svg>
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </details>
     {% endfor %}
   </nav>
 </aside>

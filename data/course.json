@@ -9,9 +9,24 @@
   },
   "tasks": [
     {
+      "id": "task-0",
+      "number": 0,
+      "title": "公开学习笔记网站设置",
+      "brief": "建立独立的公开学习档案，把 Markdown 笔记、课程任务、静态页面生成与 GitHub Pages 发布连接成一条可重复的工作流。",
+      "durationLabel": "个人准备",
+      "deadlineLabel": "课程开始前",
+      "requirements": [
+        "创建独立的 learning-notes-site GitHub 仓库。",
+        "建立 Task 笔记与阅读笔记分离的 Markdown 内容结构。",
+        "配置静态页面构建流程与 GitHub Pages 自动发布。"
+      ],
+      "readings": []
+    },
+    {
       "id": "task-1",
       "number": 1,
       "title": "环境准备与课前导读",
+      "brief": "完成开发环境与工具链自检，并通过课前导读建立 Agent、RAG 与数据系统的公共基础。",
       "durationDays": 2,
       "deadline": "2026-09-17T03:00:00+08:00",
       "requirements": [
@@ -19,14 +34,16 @@
         "完成课前导读与公共基础。"
       ],
       "readings": [
-        { "track": "公共基础篇", "code": "F1", "title": "大模型的本质与边界" },
-        { "track": "公共基础篇", "code": "F2", "title": "AI Agent 的完整图景" }
+        { "track": "课前导读", "code": "F0", "title": "课前闲聊 —— OpenClaw 为什么越用越好用？", "sourcePath": "docs/base_knowledge/F0 课程稿：课前闲聊 —— OpenClaw 为什么越用越好用？.md" },
+        { "track": "公共基础篇", "code": "F1", "title": "大模型的本质与边界", "sourcePath": "docs/base_knowledge/F1 课程稿：AI 必知必会（一） —— 大模型的本质与边界.md" },
+        { "track": "公共基础篇", "code": "F2", "title": "AI Agent 的完整图景", "sourcePath": "docs/base_knowledge/F2 课程稿：AI 必知必会（二） —— AI Agent 全景图.md" }
       ]
     },
     {
       "id": "task-2",
       "number": 2,
-      "title": "Task 2",
+      "title": "Agent 调用与行动循环",
+      "brief": "从模型 API 与向量数据库起步，跑通 Agent 从推理、行动到观察的基本循环。",
       "durationDays": 3,
       "deadline": "2026-09-20T03:00:00+08:00",
       "requirements": [
@@ -35,15 +52,16 @@
         "通过阅读并跑通 code/D1 目录下的 d1_1 到 d1_6 示例代码，体验从大模型基础调用，一路到“推理→行动→观察” Agent 多轮循环的完整演进流程。"
       ],
       "readings": [
-        { "track": "产品篇", "code": "P1", "title": "找准 Agent 的用武之地 —— AI Agent 场景识别" },
-        { "track": "开发者篇", "code": "D1", "title": "让 Agent 会查资料 —— RAG 产品设计" },
-        { "track": "产业应用篇", "code": "I1", "title": "AI 原生数据系统" }
+        { "track": "产品篇", "code": "P1", "title": "找准 Agent 的用武之地 —— AI Agent 场景识别", "sourcePath": "docs/pm/P1 课程稿：AI Agent 场景识别.md" },
+        { "track": "开发者篇", "code": "D1", "title": "让 Agent 会查资料 —— RAG 产品设计", "sourcePath": "docs/dev/D1 课程稿：大模型 API 工程化基础.md" },
+        { "track": "产业应用篇", "code": "I1", "title": "AI 原生数据系统", "sourcePath": "docs/industry/I1 课程稿：AI 原生数据库基础.md" }
       ]
     },
     {
       "id": "task-3",
       "number": 3,
-      "title": "Task 3",
+      "title": "RAG 与向量搜索",
+      "brief": "理解 RAG 的基础流程与混合搜索，并通过最小示例体验向量检索。",
       "durationDays": 3,
       "deadline": "2026-09-23T03:00:00+08:00",
       "requirements": [
@@ -51,14 +69,15 @@
         "预习并跑通 code/D2 目录下的 d2_1 到 d2_2 示例代码，体验 AI 系统中的向量搜索。"
       ],
       "readings": [
-        { "track": "产品篇", "code": "P2", "title": "让 Agent 会查资料 —— RAG 产品设计" },
-        { "track": "产业应用篇", "code": "I2", "title": "RAG 与向量数据库" }
+        { "track": "产品篇", "code": "P2", "title": "让 Agent 会查资料 —— RAG 产品设计", "sourcePath": "docs/pm/P2 课程稿：Agentic RAG 产品设计.md" },
+        { "track": "产业应用篇", "code": "I2", "title": "RAG 与向量数据库", "sourcePath": "docs/industry/I2 课程稿：向量数据库与 RAG.md" }
       ]
     },
     {
       "id": "task-4",
       "number": 4,
-      "title": "Task 4",
+      "title": "AI Native 数据层与 AI Functions",
+      "brief": "实践向量化、存储、混合查询与 AI Functions，理解 AI 应用的数据承载方式。",
       "durationDays": 3,
       "deadline": "2026-09-26T03:00:00+08:00",
       "requirements": [
@@ -66,14 +85,15 @@
         "通过 pyseekdb 向量数据库，执行 AI Function，了解在数据库系统中调用 AI 的方式。"
       ],
       "readings": [
-        { "track": "开发者篇", "code": "D2", "title": "统一 AI Native 数据层实战" },
-        { "track": "产业应用篇", "code": "I3", "title": "SQL × AI —— AI Functions 的设计与执行" }
+        { "track": "开发者篇", "code": "D2", "title": "统一 AI Native 数据层实战", "sourcePath": "docs/dev/D2 课程稿：AI 应用的数据层.md" },
+        { "track": "产业应用篇", "code": "I3", "title": "SQL × AI —— AI Functions 的设计与执行", "sourcePath": "docs/industry/I3 课程稿：SQL × AI —— AI Functions 的设计与执行.md" }
       ]
     },
     {
       "id": "task-5",
       "number": 5,
-      "title": "Task 5",
+      "title": "记忆系统与 File SQL",
+      "brief": "理解记忆系统保存关键价值的方式，并完成一次面向文件的 SQL 查询。",
       "durationDays": 3,
       "deadline": "2026-09-29T03:00:00+08:00",
       "requirements": [
@@ -81,14 +101,15 @@
         "完成一条简单的 select from read_csv(xxx.csv) 流程。"
       ],
       "readings": [
-        { "track": "产品篇", "code": "P3", "title": "让 Agent 真正记住你 —— 记忆系统设计" },
-        { "track": "产业应用篇", "code": "I4", "title": "File SQL for AI Agent" }
+        { "track": "产品篇", "code": "P3", "title": "让 Agent 真正记住你 —— 记忆系统设计", "sourcePath": "docs/pm/P3 课程稿：Agent 记忆系统设计.md" },
+        { "track": "产业应用篇", "code": "I4", "title": "File SQL for AI Agent", "sourcePath": "docs/industry/I4 课程稿：File SQL for AI Agent.md" }
       ]
     },
     {
       "id": "task-6",
       "number": 6,
-      "title": "Task 6",
+      "title": "Agentic RAG 与 AI 列",
+      "brief": "走通 Agentic RAG 的完整链路，并体验模型驱动派生数据的自动维护。",
       "durationDays": 3,
       "deadline": "2026-10-02T03:00:00+08:00",
       "requirements": [
@@ -96,14 +117,15 @@
         "通过在 pyseekdb 向量数据库创建并使用 AI 列，了解 AI 在数据系统中的真实应用场景。"
       ],
       "readings": [
-        { "track": "开发者篇", "code": "D3", "title": "实践出真知 —— Agentic RAG 实战" },
-        { "track": "产业应用篇", "code": "I5", "title": "AI 列 —— 模型驱动派生数据的自动维护" }
+        { "track": "开发者篇", "code": "D3", "title": "实践出真知 —— Agentic RAG 实战", "sourcePath": "docs/dev/D3 课程稿：Agentic RAG 实战.md" },
+        { "track": "产业应用篇", "code": "I5", "title": "AI 列 —— 模型驱动派生数据的自动维护", "sourcePath": "docs/industry/I5 课程稿：AI 列 —— 模型驱动派生数据的自动维护.md" }
       ]
     },
     {
       "id": "task-7",
       "number": 7,
-      "title": "Task 7",
+      "title": "Skill 与上下文工程",
+      "brief": "理解上下文工程工作流，并实践 MCP、Skills、Plugins 与外部上下文工具的接入。",
       "durationDays": 3,
       "deadline": "2026-10-05T03:00:00+08:00",
       "requirements": [
@@ -111,14 +133,15 @@
         "基于 MCP、Skills 和 Agent Plugins 等标准化扩展机制，实践外部上下文管理工具的安装、接入与使用，以 PowerContext 为例，完成上下文管理工具安装和调用。"
       ],
       "readings": [
-        { "track": "产品篇", "code": "P4", "title": "Skill 与 Agent 知识管理" },
-        { "track": "产业应用篇", "code": "I6", "title": "上下文工程概述" }
+        { "track": "产品篇", "code": "P4", "title": "Skill 与 Agent 知识管理", "sourcePath": "docs/pm/P4 课程稿：Skill 与 Agent 知识管理.md" },
+        { "track": "产业应用篇", "code": "I6", "title": "上下文工程概述", "sourcePath": "docs/industry/I6 课程稿：上下文工程概述.md" }
       ]
     },
     {
       "id": "task-8",
       "number": 8,
-      "title": "Task 8",
+      "title": "Agent 记忆与 PowerContext",
+      "brief": "构建具备完整记忆系统的 Agent，并理解 PowerContext 的工业实现思路。",
       "durationDays": 3,
       "deadline": "2026-10-08T03:00:00+08:00",
       "requirements": [
@@ -126,14 +149,15 @@
         "通过学习 PowerContext 项目的设计，了解记忆与上下文管理系统的工业实现思路。"
       ],
       "readings": [
-        { "track": "开发者篇", "code": "D4", "title": "记哪些、忘哪些？—— Agent 记忆系统开发" },
-        { "track": "产业应用篇", "code": "I7", "title": "PowerContext 的设计与实现" }
+        { "track": "开发者篇", "code": "D4", "title": "记哪些、忘哪些？—— Agent 记忆系统开发", "sourcePath": "docs/dev/D4 课程稿：Agent 开发与记忆系统.md" },
+        { "track": "产业应用篇", "code": "I7", "title": "PowerContext 的设计与实现", "sourcePath": "docs/industry/I7 课程稿：PowerContext 的设计与实现.md" }
       ]
     },
     {
       "id": "task-9",
       "number": 9,
-      "title": "Task 9",
+      "title": "场景、总结与测评",
+      "brief": "结合典型案例理解上下文工程的应用方式，并实践测评集构建与迁移。",
       "durationDays": 3,
       "deadline": "2026-10-11T03:00:00+08:00",
       "requirements": [
@@ -141,9 +165,9 @@
         "使用 PowerContext E2E 基于 Harbor 构建和迁移测评集，实践评估上下文工程的实施效果。"
       ],
       "readings": [
-        { "track": "产品篇", "code": "P5", "title": "Agent 场景识别" },
-        { "track": "开发者篇", "code": "D5", "title": "课程总结" },
-        { "track": "产业应用篇", "code": "I8", "title": "案例场景和测评构建" }
+        { "track": "产品篇", "code": "P5", "title": "Agent 场景识别", "sourcePath": "docs/pm/P5 课程稿：综合案例与度量.md" },
+        { "track": "开发者篇", "code": "D5", "title": "课程总结", "sourcePath": "docs/dev/D5 课程稿：课程总结.md" },
+        { "track": "产业应用篇", "code": "I8", "title": "案例场景和测评构建", "sourcePath": "docs/industry/I8 课程稿：案例场景和测评构建.md" }
       ]
     }
   ]

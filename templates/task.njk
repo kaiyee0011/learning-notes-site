@@ -17,11 +17,11 @@
     <header class="site-header">
       <a class="wordmark" href="{{ basePath }}index.html">
         <span class="wordmark-mark" aria-hidden="true">K</span>
-        <span>Study Archive</span>
+        <span>Kaiyee's Study Archive</span>
       </a>
       <nav aria-label="笔记导航">
         <a href="{{ basePath }}index.html#learning-log">全部 Task</a>
-        <a href="{{ site.progressSource }}" target="_blank" rel="noreferrer">进度表 <span aria-hidden="true">↗</span></a>
+        <a href="{{ site.courseRepository }}" target="_blank" rel="noreferrer">课程仓库 <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
 
@@ -36,39 +36,73 @@
           <dl class="note-facts" aria-label="笔记信息">
             <div><dt>日期</dt><dd>{{ currentTask.learningDate or "未记录" }}</dd></div>
             <div><dt>学习时长</dt><dd>{{ currentTask.durationMinutes + " 分钟" if currentTask.durationMinutes else "未记录" }}</dd></div>
-            <div><dt>计划周期</dt><dd>{{ currentTask.durationDays }} 天</dd></div>
+            <div><dt>计划周期</dt><dd>{{ currentTask.durationDisplay }}</dd></div>
             <div><dt>截止时间</dt><dd>{{ currentTask.deadlineDisplay }}</dd></div>
           </dl>
         </header>
 
-        <section aria-labelledby="requirements-title">
-          <h2 id="requirements-title">本次任务</h2>
-          <ol class="task-list">
-            {% for requirement in currentTask.requirements %}
-              <li><span>{{ loop.index | pad2 }}</span>{{ requirement }}</li>
-            {% endfor %}
-          </ol>
-        </section>
-
-        <section aria-labelledby="readings-title">
-          <h2 id="readings-title">对应阅读</h2>
-          <div class="related-readings">
-            {% for reading in currentTask.readings %}
-              {% if reading.note %}
-                <a href="{{ basePath }}readings/{{ reading.code }}/"><span>{{ reading.code }} · {{ reading.track }}</span><strong>{{ reading.title }}</strong><em>查看笔记 ↗</em></a>
-              {% else %}
-                <div class="locked"><span>{{ reading.code }} · {{ reading.track }}</span><strong>{{ reading.title }}</strong><em>未解锁</em></div>
-              {% endif %}
-            {% endfor %}
+        <section class="task-brief" aria-labelledby="brief-title">
+          <p class="section-index">01</p>
+          <div>
+            <h2 id="brief-title">任务说明</h2>
+            <p>{{ currentTask.brief }}</p>
+            <p class="task-scope">
+              {% for reading in currentTask.readings %}
+                <span>{{ reading.code }} · {{ reading.track }}</span>
+              {% endfor %}
+            </p>
           </div>
         </section>
 
-        <div class="note-body">
-          {{ contentHtml | safe }}
-        </div>
+        <section class="checklist-section" aria-labelledby="checklist-title">
+          <p class="section-index">02</p>
+          <div>
+            <h2 id="checklist-title">Checklist</h2>
+            <ol class="task-list">
+            {% for requirement in currentTask.requirements %}
+              <li class="{% if currentTask.isComplete %}is-checked{% endif %}">
+                <span class="check-mark" aria-hidden="true">{% if currentTask.isComplete %}✓{% endif %}</span>
+                <span>{{ requirement }}</span>
+              </li>
+            {% endfor %}
+            </ol>
+          </div>
+        </section>
+
+        <section class="reflection-section" aria-label="心得">
+          <p class="section-index">03</p>
+          <div class="note-body">
+            {{ contentHtml | safe }}
+          </div>
+        </section>
+
+        {% if currentTask.notedReadings.length %}
+        <section class="related-readings" aria-labelledby="related-title">
+          <p class="section-index">04</p>
+          <div>
+            <h2 id="related-title">阅读笔记</h2>
+            <div class="reading-preview-list">
+              {% for reading in currentTask.notedReadings %}
+                <a class="reading-preview" href="{{ basePath }}readings/{{ reading.code }}/">
+                  <p class="reading-preview-tag"><b>{{ reading.code }}</b><span>{{ reading.track }}</span></p>
+                  <h3>{{ reading.title }}</h3>
+                  {% if reading.summary %}<p class="reading-preview-deck">{{ reading.summary }}</p>{% endif %}
+                  {% if reading.learningDate or reading.durationMinutes %}
+                  <p class="reading-preview-foot">
+                    {% if reading.learningDate %}<time>{{ reading.learningDate }}</time>{% endif %}
+                    {% if reading.durationMinutes %}<span>{{ reading.durationMinutes }} 分钟</span>{% endif %}
+                  </p>
+                  {% endif %}
+                  <i aria-hidden="true">↗</i>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+        {% endif %}
 
         <footer class="note-footer">
-          <a href="{{ site.progressSource }}" target="_blank" rel="noreferrer">查看飞书进度表 <span aria-hidden="true">↗</span></a>
+          <a href="{{ site.courseRepository }}" target="_blank" rel="noreferrer">查看课程仓库 <span aria-hidden="true">↗</span></a>
           <a href="{{ basePath }}index.html#learning-log">返回学习进度</a>
         </footer>
       </article>

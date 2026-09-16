@@ -1,0 +1,12 @@
+{
+  // 在 content/ 下的 Markdown 里粘贴或拖入图片时，自动把文件存进 public/assets/，
+  // 并以所在笔记名作前缀避免重名（如 F1-image.png）。
+  // VS Code 插入的相对链接正好是 ../../public/assets/xxx.png —— 预览可见，
+  // 构建时 scripts/build.mjs 会把 public/ 那一层去掉，网页同样可见。
+  "markdown.copyFiles.destination": {
+    "/content/**/*.md": "${documentWorkspaceFolder}/public/assets/${documentBaseName}-${fileName}"
+  },
+  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
+  "markdown.editor.drop.copyIntoWorkspace": "mediaFiles",
+  "editor.pasteAs.enabled": true
+}

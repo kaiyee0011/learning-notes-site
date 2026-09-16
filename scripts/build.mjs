@@ -22,11 +22,27 @@ function formatDeadline(value) {
   return `${pad(date.getMonth() + 1)} 月 ${pad(date.getDate())} 日 ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
 
+function formatDeadlineCompact(value) {
+  const date = new Date(value);
+  return `${pad(date.getMonth() + 1)}.${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+function courseSourceUrl(sourcePath) {
+  const encodedPath = sourcePath.split("/").map(encodeURIComponent).join("/");
+  return `${course.site.courseRepository}/blob/main/${encodedPath}`;
+}
+
 function formatDate(value) {
   if (!value) return null;
   const date = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.getTime())) return String(value);
   return `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())}`;
+}
+
+// 源文件里的图片写成 ../../public/assets/，这样 VS Code 预览能直接解析；
+// 构建时 public/ 的内容被铺到 dist/ 根部，所以产物里要去掉 public 这一层。
+function rewriteAssetPaths(html) {
+  return html.replaceAll("../../public/assets/", "../../assets/");
 }
 
 async function loadNote(filePath) {
@@ -36,7 +52,7 @@ async function loadNote(filePath) {
     if (parsed.data.draft === true) return null;
     return {
       meta: parsed.data,
-      html: markdown.render(parsed.content),
+      html: rewriteAssetPaths(markdown.render(parsed.content)),
     };
   } catch (error) {
     if (error.code === "ENOENT") return null;
@@ -58,8 +74,10 @@ async function decorateCourse() {
       readings.push({
         ...rawReading,
         note: readingNote,
+        summary: readingNote?.meta.summary ?? null,
         learningDate: formatDate(readingNote?.meta.date),
         durationMinutes: readingNote?.meta.duration_minutes ?? null,
+        sourceUrl: courseSourceUrl(rawReading.sourcePath),
         url: readingNote ? `./readings/${rawReading.code}/` : null,
       });
     }
@@ -67,8 +85,11 @@ async function decorateCourse() {
     const difficulty = taskNote?.meta.difficulty ?? null;
     const task = {
       ...rawTask,
-      deadlineDisplay: formatDeadline(rawTask.deadline),
+      durationDisplay: rawTask.durationLabel ?? `${rawTask.durationDays} 天`,
+      deadlineDisplay: rawTask.deadline ? formatDeadline(rawTask.deadline) : rawTask.deadlineLabel,
+      deadlineCompact: rawTask.deadline ? formatDeadlineCompact(rawTask.deadline) : rawTask.deadlineLabel,
       note: taskNote,
+      isComplete: taskNote?.meta.status === "completed",
       noteUrl: taskNote ? `./notes/${rawTask.id}/` : null,
       learningDate: formatDate(taskNote?.meta.date),
       durationMinutes: taskNote?.meta.duration_minutes ?? null,
@@ -76,6 +97,8 @@ async function decorateCourse() {
       difficultyFilled: difficulty ? Array.from({ length: difficulty }) : [],
       difficultyEmpty: difficulty ? Array.from({ length: 5 - difficulty }) : [],
       readings,
+      // 任务笔记末尾的「阅读笔记」预览只列已写好的
+      notedReadings: readings.filter((reading) => reading.note),
       searchText: [rawTask.title, ...rawTask.requirements, ...rawTask.readings.flatMap((item) => [item.code, item.title, item.track])].join(" "),
     };
     tasks.push(task);

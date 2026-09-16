@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
     "new:task": "node scripts/new-note.mjs task",
     "new:reading": "node scripts/new-note.mjs reading"
   },

@@ -17,7 +17,7 @@
     <header class="site-header">
       <a class="wordmark" href="{{ basePath }}index.html">
         <span class="wordmark-mark" aria-hidden="true">K</span>
-        <span>Study Archive</span>
+        <span>Kaiyee's Study Archive</span>
       </a>
       <nav aria-label="笔记导航">
         <a href="{{ basePath }}notes/{{ currentTask.id }}/">Task {{ currentTask.number }}</a>
@@ -39,6 +39,17 @@
             <div><dt>学习时长</dt><dd>{{ currentReading.durationMinutes + " 分钟" if currentReading.durationMinutes else "未记录" }}</dd></div>
           </dl>
         </header>
+
+        <section class="reading-source" aria-labelledby="source-title">
+          <p class="section-index">SOURCE</p>
+          <div>
+            <h2 id="source-title">原阅读文章</h2>
+            <a href="{{ currentReading.sourceUrl }}" target="_blank" rel="noreferrer">
+              <span>{{ currentReading.code }}：{{ currentReading.title }}</span>
+              <b aria-hidden="true">↗</b>
+            </a>
+          </div>
+        </section>
 
         <div class="note-body">
           {{ contentHtml | safe }}

@@ -18,14 +18,14 @@ if (kind === "task") {
   const task = course.tasks.find((item) => item.id === requestedId.toLowerCase());
   if (!task) throw new Error(`Unknown task: ${requestedId}`);
   target = path.join(root, "content/tasks", `${task.id}.md`);
-  content = `---\ntitle: ${task.title}\ntask: ${task.id}\ndate:\nduration_minutes:\ndifficulty:\nstatus: in-progress\ndraft: true\nsummary:\n---\n\n## Takeaway\n\n\n\n## 完成情况\n\n\n\n## 学习随笔\n\n\n\n## 下一步\n\n`;
+  content = `---\ntitle: ${task.title}\ntask: ${task.id}\ndate:\nduration_minutes:\ndifficulty:\nstatus: in-progress\ndraft: true\nsummary:\n---\n\n## 心得\n\n### 核心收获\n\n\n\n### 学习过程中的随笔\n\n\n\n### 下一步\n\n`;
 } else {
   const code = requestedId.toUpperCase();
   const matches = course.tasks.flatMap((task) => task.readings.map((reading) => ({ task, reading }))).filter(({ reading }) => reading.code === code);
   if (!matches.length) throw new Error(`Unknown reading: ${requestedId}`);
   const { task, reading } = matches[0];
   target = path.join(root, "content/readings", `${code}.md`);
-  content = `---\ntitle: ${reading.title}\ncode: ${code}\ntask: ${task.id}\ndate:\nduration_minutes:\ndifficulty:\ndraft: true\nsummary:\n---\n\n## 核心结论\n\n\n\n## 概念与例子\n\n\n\n## 仍然不清楚\n\n`;
+  content = `---\ntitle: ${reading.title}\ncode: ${code}\ntask: ${task.id}\nsource: ${reading.sourcePath}\ndate:\nduration_minutes:\ndifficulty:\ndraft: true\nsummary:\n---\n\n## Takeaway\n\n\n\n## 学习过程中的随笔\n\n\n`;
 }
 
 try {
