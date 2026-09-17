@@ -9,14 +9,17 @@
 在项目根目录执行：
 
 ```bash
-# 新建 Task 笔记
-npm run new:task -- task-2
+# 一次性补齐所有还没有的笔记文件（已存在的不会被覆盖）
+npm run new:all
 
-# 新建阅读笔记（代码来自 data/course.json）
+# 也可以单独新建
+npm run new:task -- task-2
 npm run new:reading -- P1
 ```
 
-笔记会分别生成到 `content/tasks/` 和 `content/readings/`。完成后补全 YAML，并把 `draft: true` 改为 `draft: false`，入口才会解锁。
+`npm run new:all` 会按 `data/course.json` 把 Task 0—9 和全部 P / D / I 阅读笔记的空模版铺好，YAML 的 title、code、task、source 都已填好，正文只留标题骨架。所有新文件都是 `draft: true`，不会出现在网站上；写完内容后补上 `date`、`duration_minutes`、`summary`，再把 `draft` 改成 `false`，入口才会解锁。
+
+笔记分别位于 `content/tasks/` 和 `content/readings/`。
 
 - Task 笔记固定为：任务说明、Checklist、心得。
 - 阅读笔记固定为：原阅读文章、Takeaway、学习过程中的随笔。

@@ -262,6 +262,9 @@ body > footer p { margin: 0; }
 .thought-list figcaption > span, .text-thought > span { color: var(--muted); font-family: var(--mono); font-size: 0.7rem; }
 .thought-list img { width: 100%; max-height: 200px; object-fit: contain; object-position: top right; border: 1px solid var(--line); border-radius: 8px; filter: grayscale(1); background: var(--soft); }
 .text-thought { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); }
+/* 截图本身带成段正文，缩进侧栏会看不清，改为整幅展示并与随笔文字左对齐 */
+.thought-list figure.is-wide { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.thought-list figure.is-wide img { width: auto; max-width: min(100%, 560px); max-height: 440px; margin-left: 66px; object-position: top left; }
 .next-step { padding: 44px; border: 1px solid var(--line); border-radius: 18px; background: var(--glass); backdrop-filter: blur(16px); }
 .next-step .eyebrow { margin-bottom: 18px; }
 .note-article .next-step h2 { margin-bottom: 26px; }
@@ -326,6 +329,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .note-body { margin-top: 52px; }
   .thought-list figure { grid-template-columns: 1fr; gap: 20px; }
   .thought-list img { width: min(100%, 380px); max-height: 220px; object-position: top left; }
+  .thought-list figure.is-wide img { width: auto; max-width: 100%; max-height: 320px; margin-left: 0; }
   .next-step { padding: 30px 22px; }
 }
 
