@@ -45,14 +45,29 @@ function rewriteAssetPaths(html) {
   return html.replaceAll("../../public/assets/", "../../assets/");
 }
 
+// 从渲染后的 HTML 数字数，而不是数 Markdown 源码：笔记正文里混了 thought-list 这类
+// 内联 HTML，数源码会把标签和 class 名也算进去。代码块按惯例不计入正文字数。
+function countWords(html) {
+  const text = html
+    .replace(/<pre[\s\S]*?<\/pre>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z]+;|&#\d+;/gi, " ");
+  // 中日韩字符按「字」计，拉丁字母与数字串按「词」计
+  const cjk = text.match(/[㐀-䶿一-鿿぀-ヿ가-힯]/g)?.length ?? 0;
+  const latin = text.match(/[A-Za-z0-9][A-Za-z0-9'’._-]*/g)?.length ?? 0;
+  return cjk + latin;
+}
+
 async function loadNote(filePath) {
   try {
     const raw = await fs.readFile(filePath, "utf8");
     const parsed = matter(raw);
     if (parsed.data.draft === true) return null;
+    const html = rewriteAssetPaths(markdown.render(parsed.content));
     return {
       meta: parsed.data,
-      html: rewriteAssetPaths(markdown.render(parsed.content)),
+      html,
+      wordCount: countWords(html),
     };
   } catch (error) {
     if (error.code === "ENOENT") return null;
@@ -77,6 +92,8 @@ async function decorateCourse() {
         summary: readingNote?.meta.summary ?? null,
         learningDate: formatDate(readingNote?.meta.date),
         durationMinutes: readingNote?.meta.duration_minutes ?? null,
+        wordCount: readingNote?.wordCount ?? null,
+        wordCountDisplay: readingNote ? readingNote.wordCount.toLocaleString("en-US") : null,
         sourceUrl: courseSourceUrl(rawReading.sourcePath),
         url: readingNote ? `./readings/${rawReading.code}/` : null,
       });
@@ -93,6 +110,8 @@ async function decorateCourse() {
       noteUrl: taskNote ? `./notes/${rawTask.id}/` : null,
       learningDate: formatDate(taskNote?.meta.date),
       durationMinutes: taskNote?.meta.duration_minutes ?? null,
+      wordCount: taskNote?.wordCount ?? null,
+      wordCountDisplay: taskNote ? taskNote.wordCount.toLocaleString("en-US") : null,
       difficulty,
       difficultyFilled: difficulty ? Array.from({ length: difficulty }) : [],
       difficultyEmpty: difficulty ? Array.from({ length: 5 - difficulty }) : [],

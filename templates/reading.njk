@@ -37,6 +37,7 @@
             <div><dt>所属任务</dt><dd>Task {{ currentTask.number }}</dd></div>
             <div><dt>日期</dt><dd>{{ currentReading.learningDate or "未记录" }}</dd></div>
             <div><dt>学习时长</dt><dd>{{ currentReading.durationMinutes + " 分钟" if currentReading.durationMinutes else "未记录" }}</dd></div>
+            <div><dt>笔记字数</dt><dd>{{ currentReading.wordCountDisplay }} 字</dd></div>
           </dl>
         </header>
 

@@ -36,6 +36,7 @@
           <dl class="note-facts" aria-label="笔记信息">
             <div><dt>日期</dt><dd>{{ currentTask.learningDate or "未记录" }}</dd></div>
             <div><dt>学习时长</dt><dd>{{ currentTask.durationMinutes + " 分钟" if currentTask.durationMinutes else "未记录" }}</dd></div>
+            <div><dt>笔记字数</dt><dd>{{ currentTask.wordCountDisplay }} 字</dd></div>
             <div><dt>计划周期</dt><dd>{{ currentTask.durationDisplay }}</dd></div>
             <div><dt>截止时间</dt><dd>{{ currentTask.deadlineDisplay }}</dd></div>
           </dl>
@@ -87,10 +88,11 @@
                   <p class="reading-preview-tag"><b>{{ reading.code }}</b><span>{{ reading.track }}</span></p>
                   <h3>{{ reading.title }}</h3>
                   {% if reading.summary %}<p class="reading-preview-deck">{{ reading.summary }}</p>{% endif %}
-                  {% if reading.learningDate or reading.durationMinutes %}
+                  {% if reading.learningDate or reading.durationMinutes or reading.wordCount %}
                   <p class="reading-preview-foot">
                     {% if reading.learningDate %}<time>{{ reading.learningDate }}</time>{% endif %}
                     {% if reading.durationMinutes %}<span>{{ reading.durationMinutes }} 分钟</span>{% endif %}
+                    {% if reading.wordCount %}<span>{{ reading.wordCountDisplay }} 字</span>{% endif %}
                   </p>
                   {% endif %}
                   <i aria-hidden="true">↗</i>

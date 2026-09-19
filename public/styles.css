@@ -216,7 +216,7 @@ body > footer p { margin: 0; }
 .note-title > p:first-child { margin: 0 0 16px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; }
 .note-title h1 { margin: 0; max-width: 14em; font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 500; line-height: 1.12; letter-spacing: -0.04em; }
 .note-deck { max-width: 38rem; margin: 18px 0 0; color: var(--muted); font-size: 0.94rem; line-height: 1.7; }
-.note-facts { margin: 24px 0 0; padding-top: 14px; display: flex; gap: 30px; border-top: 1px solid var(--line); }
+.note-facts { margin: 24px 0 0; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 14px 30px; border-top: 1px solid var(--line); }
 .note-facts div { display: grid; gap: 3px; }
 .note-facts dt { color: var(--muted); font-size: 0.68rem; }
 .note-facts dd { margin: 0; font-size: 0.78rem; }
